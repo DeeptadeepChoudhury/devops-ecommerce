@@ -1,18 +1,18 @@
 package com.devops.order_service.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/orders")
 public class OrderController {
 
-    @GetMapping("/")
-    public String home() {
-        return "Order Service is running";
+    @GetMapping
+    public String getOrders() {
+        return "List of orders";
     }
 
-    @GetMapping("/orders")
-    public String orders() {
-        return "List of orders";
+    @PostMapping
+    public String createOrder() {
+        return "Order created";
     }
 }
