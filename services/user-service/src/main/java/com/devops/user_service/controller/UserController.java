@@ -1,18 +1,35 @@
 package com.devops.user_service.controller;
 
+import com.devops.user_service.model.User;
+import com.devops.user_service.repository.UserRepository;
+import com.devops.user_service.exception.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-    @GetMapping
-    public String getUsers() {
-        return "List of users";
+    private final UserRepository userRepository;
+
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @PostMapping
-    public String createUser() {
-        return "User created";
+    public User createUser(@RequestBody User user) {
+        return userRepository.save(user);
+    }
+
+    @GetMapping
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public User getUser(@PathVariable Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + id));
     }
 }
