@@ -1,5 +1,10 @@
 spring:
   application:
     name: order-service
+
 server:
   port: 8083
+  
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%X{X-Correlation-ID}] %-5level %logger - %msg%n"
