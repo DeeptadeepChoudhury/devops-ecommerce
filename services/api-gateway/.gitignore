@@ -1,25 +1,23 @@
+HELP.md
 target/
-.git
-.gitignore
-*.log
-
-# Maven wrapper (optional keep/remove)
 .mvn/wrapper/maven-wrapper.jar
-
-# Allow nested targets if needed (your existing rules)
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### IDE ###
-.idea
-.vscode
-*.iml
-*.iws
-*.ipr
+### STS ###
+.apt_generated
 .classpath
+.factorypath
 .project
 .settings
+.springBeans
 .sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
 
 ### NetBeans ###
 /nbproject/private/
@@ -30,3 +28,6 @@ target/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
+
+### VS Code ###
+.vscode/

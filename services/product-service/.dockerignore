@@ -1,5 +1,17 @@
-target/
+# Ignore everything in target
+target/*
+
+# But allow JAR files
+!target/*.jar
+
+# Git
 .git
 .gitignore
-node_modules
+
+# Logs
 *.log
+
+# IDE
+.idea
+.vscode
+*.iml
