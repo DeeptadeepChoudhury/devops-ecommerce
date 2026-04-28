@@ -8,3 +8,13 @@ server:
 logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%X{X-Correlation-ID}] %-5level %logger - %msg%n"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+  endpoint:
+    health:
+      show-details: always
