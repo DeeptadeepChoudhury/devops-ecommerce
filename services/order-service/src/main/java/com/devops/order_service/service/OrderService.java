@@ -11,11 +11,18 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 @Service
 public class OrderService {
 
     private static final Logger log = LoggerFactory.getLogger(OrderService.class);
+
+    @Value("${USER_SERVICE_URL}")
+    private String userServiceUrl;
+
+    @Value("${PRODUCT_SERVICE_URL}")
+    private String productServiceUrl;
 
     private final WebClient webClient;
 
@@ -29,7 +36,7 @@ public class OrderService {
          request.getUserId(), request.getProductId());
 
         User user = webClient.get()
-                .uri("http://user-service:8080/users/{id}", request.getUserId())
+                .uri(userServiceUrl + "/users/{id}", request.getUserId())
                 .retrieve()
                 .onStatus(status -> status.is4xxClientError(), response ->
                         response.bodyToMono(String.class)
@@ -40,7 +47,7 @@ public class OrderService {
                 .block();
 
         Product product = webClient.get()
-                .uri("http://product-service:8082/products/{id}", request.getProductId())
+                .uri(productServiceUrl + "/products/{id}", request.getProductId())
                 .retrieve()
                 .onStatus(status -> status.is4xxClientError(), response ->
                         response.bodyToMono(String.class)
